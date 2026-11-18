@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07131e" />
+    <meta name="description" content="Review unusual sonar returns flagged in the NOAA held-out replay." />
+    <title>Detection review — Coastal Sentinel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/pages.css" />
+  </head>
+  <body data-page="detections">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="/" aria-label="Coastal Sentinel home"><span class="brand-mark"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M5 19c4.3 0 4.3-7 8.7-7s4.3 12 8.6 12 4.4-7 8.7-7M5 27c4.3 0 4.3-4 8.7-4M23 29c4.3 0 4.3-4 8.7-4" /></svg></span><span><strong>COASTAL</strong><small>SENTINEL</small></span></a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="navigation" aria-label="Main navigation">
+          <a class="nav-link" href="/" title="Overview"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="5.5" height="5.5" rx="1" /><rect x="11.5" y="3" width="5.5" height="5.5" rx="1" /><rect x="3" y="11.5" width="5.5" height="5.5" rx="1" /><rect x="11.5" y="11.5" width="5.5" height="5.5" rx="1" /></svg>Overview</a>
+          <a class="nav-link active" href="/detections" aria-current="page"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5 17 6.4v7.2L10 17.5l-7-3.9V6.4z" /><path d="M10 7v3.5m0 2.5h.01" /></svg>Detections <span id="nav-alert-count" class="nav-count">0</span></a>
+          <a class="nav-link" href="/transect"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15.5 7.3 11l3.2 2.6L17 6.5" /><path d="M12.5 6.5H17V11" /></svg>Transect monitor</a>
+          <a class="nav-link" href="/model"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5v4m0 7v4m7.5-7.5h-4m-7 0h-4m12.8-5.3-2.8 2.8M5.5 14.5l-2.8 2.8m14.6 0-2.8-2.8m-9-9L2.7 2.7" /><circle cx="10" cy="10" r="3.5" /></svg>Model health</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="source-card"><span class="source-icon"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14M5 6h10M7 14h6" /><circle cx="10" cy="10" r="7.5" /></svg></span><div><strong>NOAA ARCHIVE REPLAY</strong><span>Unlabeled EK60 · 18 kHz</span></div><span class="demo-dot"></span></div>
+          <div class="profile"><div class="avatar">OC</div><div><strong>Oceanic Research</strong><span>Field operations</span></div><button class="more-button" aria-label="More account options">···</button></div>
+        </div>
+      </aside>
+      <main class="main-content">
+        <header class="topbar"><div class="breadcrumb"><a href="/">Monitoring</a><span class="breadcrumb-separator">/</span><strong>Detection review</strong></div><div class="topbar-actions"><div class="utc-clock"><span class="clock-dot"></span><span id="utc-time">--:--:-- UTC</span></div><button id="stream-toggle" class="button button-primary"><span class="button-icon">Ⅱ</span> Pause stream</button></div></header>
+        <div class="page-content">
+          <section class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> STEP 1 · REVIEW ALERTS</div><h1>Detection review</h1><p>Review unusual acoustic returns flagged in the held-out NOAA recording.</p></div><div class="heading-meta"><span class="demo-badge"><span></span> ARCHIVE REPLAY</span><span class="last-updated">Stream status <strong id="page-stream-status">Connecting…</strong></span></div></section>
+          <section class="simple-stats"><article class="metric-card"><div class="metric-top"><span>Alerts in recent window</span><span class="metric-icon amber">△</span></div><div class="metric-value" id="page-alert-count">0</div><div class="metric-foot">Pings that crossed the review cutoff</div></article><article class="metric-card"><div class="metric-top"><span>Cutoff</span><span class="metric-icon blue">◉</span></div><div class="metric-value" id="page-alert-threshold">—</div><div class="metric-foot">Calibrated using the validation split</div></article><article class="metric-card"><div class="metric-top"><span>Replay source</span><span class="metric-icon cyan">⌁</span></div><div class="metric-value compact-value">Held-out data</div><div class="metric-foot">Not a live sonar instrument feed</div></article></section>
+          <section class="panel page-panel">
+            <div class="panel-header"><div><div class="panel-title-row"><h2>Flagged pings</h2><span id="feed-count" class="count-pill">0</span></div><p>Each row is an outlier candidate, not a debris identification.</p></div><button id="clear-detections" class="text-button">Clear this view</button></div>
+            <div class="beginner-callout"><span>i</span><p><strong>How to read this:</strong> A higher percentile means the ping is more unusual compared with training data. The NOAA archive has no ghost-net or debris labels, so alerts need human review.</p></div>
+            <div id="detection-list" class="detection-list full-detection-list"><div id="empty-state" class="empty-state"><span class="empty-icon">⌁</span><strong>Waiting for flagged pings</strong><span>Alerts appear here as the held-out recording is analyzed.</span></div></div>
+          </section>
+          <footer class="page-footer"><span>COASTAL SENTINEL <i>·</i> DETECTION REVIEW</span><span>UNLABELED FISHERIES SONAR · NOT DEBRIS VALIDATION</span><span id="connection-state"><i></i> Connecting to stream</span></footer>
+        </div>
+      </main>
+    </div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>

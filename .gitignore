@@ -1,0 +1,26 @@
+# Python environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Downloaded source data and generated training artifacts
+data/raw/*.csv
+data/splits/*.csv
+models/*.joblib
+models/model_metadata.json
+
+# Node tooling
+node_modules/
+npm-debug.log*
+
+# Operating system files
+.DS_Store
+Thumbs.db

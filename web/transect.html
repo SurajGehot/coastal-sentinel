@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07131e" />
+    <meta name="description" content="Follow anomaly scores and sonar return range through the held-out NOAA replay." />
+    <title>Transect monitor — Coastal Sentinel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/pages.css" />
+  </head>
+  <body data-page="transect">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="/" aria-label="Coastal Sentinel home"><span class="brand-mark"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M5 19c4.3 0 4.3-7 8.7-7s4.3 12 8.6 12 4.4-7 8.7-7M5 27c4.3 0 4.3-4 8.7-4M23 29c4.3 0 4.3-4 8.7-4" /></svg></span><span><strong>COASTAL</strong><small>SENTINEL</small></span></a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="navigation" aria-label="Main navigation">
+          <a class="nav-link" href="/"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="5.5" height="5.5" rx="1" /><rect x="11.5" y="3" width="5.5" height="5.5" rx="1" /><rect x="3" y="11.5" width="5.5" height="5.5" rx="1" /><rect x="11.5" y="11.5" width="5.5" height="5.5" rx="1" /></svg>Overview</a>
+          <a class="nav-link" href="/detections"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5 17 6.4v7.2L10 17.5l-7-3.9V6.4z" /><path d="M10 7v3.5m0 2.5h.01" /></svg>Detections <span id="nav-alert-count" class="nav-count">0</span></a>
+          <a class="nav-link active" href="/transect" aria-current="page"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15.5 7.3 11l3.2 2.6L17 6.5" /><path d="M12.5 6.5H17V11" /></svg>Transect monitor</a>
+          <a class="nav-link" href="/model"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5v4m0 7v4m7.5-7.5h-4m-7 0h-4m12.8-5.3-2.8 2.8M5.5 14.5l-2.8 2.8m14.6 0-2.8-2.8m-9-9L2.7 2.7" /><circle cx="10" cy="10" r="3.5" /></svg>Model health</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="source-card"><span class="source-icon"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h14M5 6h10M7 14h6" /><circle cx="10" cy="10" r="7.5" /></svg></span><div><strong>NOAA ARCHIVE REPLAY</strong><span>Unlabeled EK60 · 18 kHz</span></div><span class="demo-dot"></span></div>
+          <div class="profile"><div class="avatar">OC</div><div><strong>Oceanic Research</strong><span>Field operations</span></div><button class="more-button" aria-label="More account options">···</button></div>
+        </div>
+      </aside>
+      <main class="main-content">
+        <header class="topbar"><div class="breadcrumb"><a href="/">Monitoring</a><span class="breadcrumb-separator">/</span><strong>Transect monitor</strong></div><div class="topbar-actions"><div class="utc-clock"><span class="clock-dot"></span><span id="utc-time">--:--:-- UTC</span></div><button id="stream-toggle" class="button button-primary"><span class="button-icon">Ⅱ</span> Pause stream</button></div></header>
+        <div class="page-content">
+          <section class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> STEP 2 · FOLLOW THE PINGS</div><h1>Transect monitor</h1><p>Watch the model score each ping in the unseen part of the NOAA recording.</p></div><div class="heading-meta"><span class="demo-badge"><span></span> ARCHIVE REPLAY</span><span class="last-updated">Latest ping <strong id="latest-ping">Waiting…</strong></span></div></section>
+          <section class="simple-stats"><article class="metric-card"><div class="metric-top"><span>Pings scored</span><span class="metric-icon cyan">⌁</span></div><div class="metric-value" id="metric-samples">0</div><div class="metric-foot">One archived ping every 1.2 seconds</div></article><article class="metric-card"><div class="metric-top"><span>Current anomaly percentile</span><span class="metric-icon blue">◉</span></div><div class="metric-value" id="current-anomaly-score">—</div><div class="metric-foot">Higher means more unusual vs. training pings</div></article><article class="metric-card"><div class="metric-top"><span>Peak echo range</span><span class="metric-icon green">↕</span></div><div class="metric-value" id="current-depth">— m</div><div class="metric-foot">Range to strongest return in the ping</div></article></section>
+          <section class="panel page-panel transect-page-panel" id="transect">
+            <div class="panel-header"><div><h2>Ping-by-ping anomaly score</h2><p>Most recent 50 pings · amber points cross the review cutoff</p></div><span class="live-tag"><i></i> REPLAYING</span></div>
+            <div class="chart-summary"><span>ANOMALY PERCENTILE <strong>ranked vs. training data</strong></span><span>REPLAY DISTANCE <strong>nautical miles</strong></span></div>
+            <div class="chart-wrap large-chart"><div class="chart-y-labels"><span>1.0</span><span>0.75</span><span>0.50</span><span>0.25</span><span>0</span></div><div class="chart-area"><div class="chart-gridlines"><i></i><i></i><i></i><i></i><i></i></div><div class="threshold-line"><span>REVIEW CUTOFF</span></div><svg id="transect-chart" class="transect-chart" viewBox="0 0 800 240" preserveAspectRatio="none" role="img" aria-label="Anomaly percentile across recent pings"><defs><linearGradient id="area-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#36c8c0" stop-opacity=".2" /><stop offset="100%" stop-color="#36c8c0" stop-opacity="0" /></linearGradient></defs><path id="chart-area-fill" class="chart-area-fill" d="" /><path id="chart-line" class="chart-line" d="" /><g id="chart-markers"></g></svg><div class="chart-x-labels"><span>Oldest</span><span>Recent</span><span>Now</span></div></div></div>
+            <div class="chart-footer"><span><i class="footer-dot"></i> NOAA SH1305 · 18 kHz</span><span>Along-track distance <strong id="track-distance">— nm</strong></span></div>
+          </section>
+          <section class="panel page-panel range-page-panel"><div class="panel-header"><div><h2>Strongest return range</h2><p>Distance from transducer to the strongest detected echo within each ping.</p></div><span class="unit-chip">RANGE · M</span></div><div class="depth-chart-wrap large-depth-chart"><div class="depth-labels"><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span></div><svg id="depth-chart" viewBox="0 0 600 130" preserveAspectRatio="none" role="img" aria-label="Strongest echo range over recent pings"><defs><linearGradient id="depth-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#547d99" stop-opacity=".3" /><stop offset="100%" stop-color="#547d99" stop-opacity=".02" /></linearGradient></defs><path id="depth-area" d="" /><path id="depth-line" d="" /></svg></div></section>
+          <div class="beginner-callout"><span>i</span><p><strong>This is archived data, not a live boat feed.</strong> The charts show a replay of the held-out NOAA test split. NOAA’s fisheries recording is not labeled for ghost nets or marine debris.</p></div>
+          <footer class="page-footer"><span>COASTAL SENTINEL <i>·</i> TRANSECT MONITOR</span><span>UNLABELED FISHERIES SONAR · NOT DEBRIS VALIDATION</span><span id="connection-state"><i></i> Connecting to stream</span></footer>
+        </div>
+      </main>
+    </div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
